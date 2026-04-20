@@ -47,3 +47,7 @@ def bubble_sort(hodnoty):
 
 value = bubble_sort(random_numbers(20))
 print(value)
+
+
+
+

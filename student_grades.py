@@ -1,4 +1,4 @@
-from itertools import count
+from sorting import random_numbers
 
 
 class StudentsGrades:
@@ -13,17 +13,17 @@ class StudentsGrades:
 
     def get_grade(self, uco):
         if self.scores[uco] >= 90:
-            return "Žák má {self.scores[uco]} bodů a známku A"
+            return "A"
         elif self.scores[uco] >= 80:
-            return "Žák má {self.scores[uco]} bodů a známku B"
+            return "B"
         elif self.scores[uco] >= 70:
-            return "Žák má {self.scores[uco]} bodů a známku C"
+            return "C"
         elif self.scores[uco] >= 60:
-            return "Žák má {self.scores[uco]} bodů a známku D"
+            return "D"
         elif self.scores[uco] >= 50:
-            return "Žák má {self.scores[uco]} bodů a známku E"
+            return "E"
         else:
-            return "Žák má {self.scores[uco]} bodů a známku F"
+            return "F"
 
     def find(self, body):
         result = []
@@ -39,21 +39,30 @@ class StudentsGrades:
             for hod in range(0, len(self.scores) - 1 - max_index):
                 if self.scores[hod] > self.scores[hod + 1]:
                     self.scores[hod], self.scores[hod + 1] = self.scores[hod + 1], self.scores[hod]
-        print(scores)
-        print(self.scores)
+        return self.scores
 
 def main():
     results = StudentsGrades([85, 42, 91, 67, 50, 73, 100, 38, 58])
     pocet = results.count()
     print(f"Počet lidí na testu je {pocet}")
-    znamky = results.get_grade(results)
-    inde = results.get_by_index(results)
-    print(znamky)
-    print(inde)
+    for i in range(results.count()):
+        body = results.get_by_index(i)
+        znamka = results.get_grade(i)
+        print(f"Student {i}: {body} points – {znamka}")
     stopro = results.find(100)
     print(f"Počet žáku se  100 body je {stopro}")
-    rada = results.get_sorted()
-    print(f"Zarovnané od nejhoršího po nejlepší: {rada}")
+    print(f"Zarovnané od nejhoršího po nejlepší: {results.get_sorted()}")
+
+    random_results = StudentsGrades(random_numbers(30, 0, 100))
+    pocet = random_results.count()
+    print(f"Počet lidí na testu je {pocet}")
+    for i in range(random_results.count()):
+        body = random_results.get_by_index(i)
+        znamka = random_results.get_grade(i)
+        print(f"Student {i}: {body} points – {znamka}")
+    stopro = random_results.find(100)
+    print(f"Počet žáku se  100 body je {stopro}")
+    print(f"Zarovnané od nejhoršího po nejlepší: {random_results.get_sorted()}")
 
 
 
